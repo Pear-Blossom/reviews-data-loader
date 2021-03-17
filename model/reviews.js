@@ -34,21 +34,15 @@ const reviewsSchema = mongoose.Schema({
   helpfulness: Number
 });
 
+const products = mongoose.model('Products', productSchema);
 const reviews = mongoose.model('Reviews', reviewsSchema);
 
-const load = (product_id, review) => {
-  // product: initialize a variable which will represent the product document
+module.exports.findProduct = product_id => products.findOne({ product_id });
 
-  // add a check to see if there are commas within text to "&#44;"
+module.exports.createProduct = product_id => products.create({ product_id });
 
-  // first see if the product document exists
-    // if exists
-      // set the product variable to the found product document
-    // if not exists
-      // create a new product document
-      // set the product variable to the new product document
+const load = async review => {
 
-  //
 }
 
 module.exports.load = load;
