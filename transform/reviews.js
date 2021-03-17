@@ -1,4 +1,4 @@
-const booleanConverter = require('../utils/booleanConverter.js');
+const { booleanConverter } = require('../utils/booleanConverter.js');
 // 0 id
 // 1 product_id
 // 2 rating
@@ -12,7 +12,7 @@ const booleanConverter = require('../utils/booleanConverter.js');
 // 10 response
 // 11 helpfulness
 
-module.exports.reviews = review => {
+module.exports = review => {
   const reviewArray = review.split(',');
 
   const reviewObj = {
@@ -21,8 +21,14 @@ module.exports.reviews = review => {
     summary: reviewArray[4],
     recommend: booleanConverter(reviewArray[6]),
     reported: booleanConverter(reviewArray[7]),
-    response: reviewArray[10],
     body: reviewArray[5],
-    date:
+    date: new Date(reviewArray[3]),
+    reviewer_name: reviewArray[8],
+    reviewer_email: reviewArray[9],
+    helpfulness: reviewArray[11]
   };
+
+  if (reviewArray[10] !== '') reviewObj.response = reviewArray[10];
+
+  return reviewObj;
 };
