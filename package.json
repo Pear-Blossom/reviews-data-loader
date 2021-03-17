@@ -1,0 +1,25 @@
+{
+  "name": "reviews-data-loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pear-Blossom/reviews-data-loader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pear-Blossom/reviews-data-loader/issues"
+  },
+  "homepage": "https://github.com/Pear-Blossom/reviews-data-loader#readme",
+  "dependencies": {
+    "mongoose": "^5.12.0",
+    "node": "^15.10.0",
+    "underscore": "^1.12.1"
+  }
+}
