@@ -17,6 +17,7 @@ module.exports = review => {
 
   const reviewObj = {
     review_id: reviewArray[0],
+    product_id: reviewArray[1],
     rating: reviewArray[2],
     summary: reviewArray[4],
     recommend: booleanConverter(reviewArray[6]),
