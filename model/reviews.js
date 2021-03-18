@@ -17,7 +17,7 @@ const mongoose = require('../db/index.js');
 
 const productSchema = mongoose.Schema({
   product_id: Number,
-  reviews: Array
+  results: Array
 });
 
 const reviewsSchema = mongoose.Schema({
@@ -38,11 +38,7 @@ const products = mongoose.model('Products', productSchema);
 const reviews = mongoose.model('Reviews', reviewsSchema);
 
 module.exports.findProduct = product_id => products.findOne({ product_id });
-
 module.exports.createProduct = product_id => products.create({ product_id });
 
-const load = async review => {
-
-}
-
-module.exports.load = load;
+module.exports.findReview = review_id => reviews.findOne({ review_id });
+module.exports.createReview = reviewObj => reviews.create(reviewObj);
