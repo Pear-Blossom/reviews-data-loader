@@ -5,7 +5,7 @@ CREATE TABLE characteristics (
   name          varchar(20)
 );
 
-COPY characteristics FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristics.csv' DELIMITER ',' CSV HEADER ;
+COPY characteristics FROM '/Users/wilsoncheah/Documents/hackreactor/sdc_data/characteristics.csv' DELIMITER ',' CSV HEADER ;
 
 -- I'm going to need to retain the original ID for characteristics
 
@@ -32,7 +32,7 @@ CREATE TABLE characteristic_reviews (
 -- ERROR:  there is no unique constraint matching given keys for referenced table "characteristics"
 -- I thought that I had duplicate IDs but I just didn't define id in characteristics as a primary key
 
-COPY characteristic_reviews FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
+COPY characteristic_reviews FROM '/Users/wilsoncheah/Documents/hackreactor/sdc_data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
 
 CREATE TABLE reviews_temp (
   id                bigint,
@@ -49,7 +49,7 @@ CREATE TABLE reviews_temp (
   helpfulness       smallint
 );
 
-COPY reviews_temp FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews.csv' DELIMITER ',' CSV HEADER ;
+COPY reviews_temp FROM '/Users/wilsoncheah/Documents/hackreactor/sdc_data/reviews.csv' DELIMITER ',' CSV HEADER ;
 -- DO TRANSFORMATIONS FROM reviews_temp -> reviews
 
 CREATE TABLE reviews AS
@@ -115,4 +115,4 @@ CREATE TABLE reviews_photos (
     ON DELETE CASCADE
 );
 
-COPY reviews_photos FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
+COPY reviews_photos FROM '/Users/wilsoncheah/Documents/hackreactor/sdc_data/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
