@@ -5,7 +5,10 @@ CREATE TABLE characteristics (
   name          varchar(20)
 );
 
-COPY characteristics FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristics.csv' DELIMITER ',' CSV HEADER ;
+-- COPY characteristics FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristics.csv' DELIMITER ',' CSV HEADER ;
+COPY characteristics FROM '/home/ubuntu/seed_data/characteristics.csv' DELIMITER ',' CSV HEADER ;
+SELECT max(id) FROM characteristics;
+ALTER SEQUENCE characteristics_id_seq RESTART WITH 3347478;
 
 -- I'm going to need to retain the original ID for characteristics
 
@@ -32,7 +35,10 @@ CREATE TABLE characteristic_reviews (
 -- ERROR:  there is no unique constraint matching given keys for referenced table "characteristics"
 -- I thought that I had duplicate IDs but I just didn't define id in characteristics as a primary key
 
-COPY characteristic_reviews FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
+-- COPY characteristic_reviews FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
+COPY characteristic_reviews FROM '/home/ubuntu/seed_data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
+SELECT max(id) FROM characteristic_reviews;
+ALTER SEQUENCE characteristic_reviews_id_seq RESTART WITH 19337415;
 
 CREATE TABLE reviews_temp (
   id                bigint,
@@ -49,7 +55,8 @@ CREATE TABLE reviews_temp (
   helpfulness       smallint
 );
 
-COPY reviews_temp FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews.csv' DELIMITER ',' CSV HEADER ;
+-- COPY reviews_temp FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews.csv' DELIMITER ',' CSV HEADER ;
+COPY reviews_temp FROM '/home/ubuntu/seed_data/reviews.csv' DELIMITER ',' CSV HEADER ;
 -- DO TRANSFORMATIONS FROM reviews_temp -> reviews
 
 CREATE TABLE reviews AS
@@ -84,6 +91,8 @@ FROM reviews_temp;
 CREATE SEQUENCE reviews_id_seq;
 ALTER TABLE reviews ALTER COLUMN id SET DEFAULT nextval('reviews_id_seq');
 ALTER SEQUENCE reviews_id_seq OWNED BY reviews.id;
+SELECT max(id) FROM reviews;
+ALTER SEQUENCE reviews_id_seq RESTART WITH 5777922;
 
 -- set up constraints for the reviews table
 -- set id to primary key
@@ -104,7 +113,12 @@ ALTER COLUMN date SET NOT NULL,
 ALTER COLUMN body SET NOT NULL,
 ALTER COLUMN recommend SET NOT NULL,
 ALTER COLUMN reviewer_name SET NOT NULL,
-ALTER COLUMN reviewer_email SET NOT NULL;
+ALTER COLUMN reviewer_email SET NOT NULL,
+ALTER COLUMN summary SET DEFAULT NULL,
+ALTER COLUMN reported SET DEFAULT FALSE,
+ALTER COLUMN response SET DEFAULT NULL,
+ALTER COLUMN helpfulness SET DEFAULT 0
+;
 
 CREATE TABLE reviews_photos (
   id          serial primary key,
@@ -115,4 +129,20 @@ CREATE TABLE reviews_photos (
     ON DELETE CASCADE
 );
 
-COPY reviews_photos FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
+-- COPY reviews_photos FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
+COPY reviews_photos FROM '/home/ubuntu/seed_data/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
+SELECT max(id) FROM reviews_photos;
+ALTER SEQUENCE reviews_photos_id_seq RESTART WITH 2742832;
+
+
+-- indexing
+CREATE INDEX ON reviews (product_id);
+CREATE INDEX ON reviews_photos (review_id);
+CREATE INDEX ON characteristics (product_id);
+CREATE INDEX ON characteristic_reviews (characteristic_id);
+-- CREATE INDEX ON characteristic_reviews (review_id);
+-- CREATE INDEX ON characteristics (id);
+
+
+-- used to see logged in users
+select distinct username from pg_stat_activity;
