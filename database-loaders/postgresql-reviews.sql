@@ -6,7 +6,7 @@ CREATE TABLE characteristics (
 );
 
 -- COPY characteristics FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristics.csv' DELIMITER ',' CSV HEADER ;
-COPY characteristics FROM '/home/ubuntu/seed_data/characteristics.csv' DELIMITER ',' CSV HEADER ;
+COPY characteristics FROM '/home/ubuntu/characteristics.csv' DELIMITER ',' CSV HEADER ;
 SELECT max(id) FROM characteristics;
 ALTER SEQUENCE characteristics_id_seq RESTART WITH 3347478;
 
@@ -36,7 +36,7 @@ CREATE TABLE characteristic_reviews (
 -- I thought that I had duplicate IDs but I just didn't define id in characteristics as a primary key
 
 -- COPY characteristic_reviews FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
-COPY characteristic_reviews FROM '/home/ubuntu/seed_data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
+COPY characteristic_reviews FROM '/home/ubuntu/characteristic_reviews.csv' DELIMITER ',' CSV HEADER ;
 SELECT max(id) FROM characteristic_reviews;
 ALTER SEQUENCE characteristic_reviews_id_seq RESTART WITH 19337415;
 
@@ -56,7 +56,7 @@ CREATE TABLE reviews_temp (
 );
 
 -- COPY reviews_temp FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews.csv' DELIMITER ',' CSV HEADER ;
-COPY reviews_temp FROM '/home/ubuntu/seed_data/reviews.csv' DELIMITER ',' CSV HEADER ;
+COPY reviews_temp FROM '/home/ubuntu/reviews.csv' DELIMITER ',' CSV HEADER ;
 -- DO TRANSFORMATIONS FROM reviews_temp -> reviews
 
 CREATE TABLE reviews AS
@@ -130,7 +130,7 @@ CREATE TABLE reviews_photos (
 );
 
 -- COPY reviews_photos FROM '/Users/wilsoncheah/Documents/hackreactor/sei/reviews-data-loader/data/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
-COPY reviews_photos FROM '/home/ubuntu/seed_data/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
+COPY reviews_photos FROM '/home/ubuntu/reviews_photos.csv' DELIMITER ',' CSV HEADER ;
 SELECT max(id) FROM reviews_photos;
 ALTER SEQUENCE reviews_photos_id_seq RESTART WITH 2742832;
 
